@@ -12,7 +12,7 @@ function operate(operator,a,b){
    else if(operator === '*'){
    return  multiply(a,b);
    }
-   else if(operator === '/'){
+   else if(operator === '÷'){
    return divide(a,b);
    }
 }
@@ -33,3 +33,32 @@ function multiply(a,b){
 function divide(a,b){
     return parseFloat(a) / parseFloat(b);
 }
+
+let buttons = document.querySelectorAll(".calc-button");
+let displayOpration = document.getElementById("operation-display");
+let displayContent = ""
+buttons.forEach((btn) => {
+     btn.addEventListener("click", (e) =>{
+        if(e.target.value == "+" || e.target.value == "-" || e.target.value == "x" || e.target.value == "÷"){
+            operator = e.target.value;
+        }
+        if(e.target.value === "C"){
+            displayOpration.textContent = "";
+            displayContent = "";
+        }else if(e.target.value === "="){
+            operate(operator,firstOperand,secondOperand);
+            displayContent += e.target.textContent + " ";
+            displayOpration.textContent = displayContent;
+        }
+        else{
+            firstOperand = e.target.value;
+            secondOperand = e.target.value;
+            displayContent += e.target.textContent + " ";
+            displayOpration.textContent = displayContent;
+        }
+     });
+});
+
+/* function display(btn){
+    displayOpration.textContent = btn.value;
+} */
