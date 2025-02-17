@@ -35,7 +35,12 @@ clickButton();
 updateDisplay();
 
 function updateDisplay(){
-   display.textContent = displayContentValue;
+   if(displayContentValue.length > 10){
+     displayContentValue = displayContentValue.substring(0,10);
+     display.textContent = displayContentValue;
+   }else{
+    display.textContent = displayContentValue;
+   } 
 }
 
 function inputOperand(operand){
@@ -63,7 +68,7 @@ function inputOperand(operand){
 function inputOperator(operatorSign){
   if(operator == ''){
     operator = operatorSign;
-  }else if(operator != ''){
+  }else if(operator != '' && firstOperand != null && secondOperand != null){
     let result = operate(operator,firstOperand, secondOperand);
     if(result){
         displayContentValue = result;
@@ -100,53 +105,18 @@ function operate(operator,a,b){
 
 function add(a,b){
 
-    return parseFloat(a) + parseFloat(b);
+    return (parseFloat(a) + parseFloat(b)).toFixed(3);
 }
 
 function subtract(a,b){
-    return parseFloat(a) - parseFloat(b);
+    return (parseFloat(a) - parseFloat(b)).toFixed(3);
 }
 
 function multiply(a,b){
-    return parseFloat(a) * parseFloat(b);
+    return (parseFloat(a) * parseFloat(b)).toFixed(3);
 }
 
 function divide(a,b){
     if(b === 0 || b === '0'){return 'ERROR';}
-    return parseFloat(a) / parseFloat(b);
+    return (parseFloat(a) / parseFloat(b)).toFixed(3);
 }
-
-/* buttons.forEach((btn) => {
-     btn.addEventListener("click", (e) =>{
-        if(e.target.value == "+" || e.target.value == "-" || e.target.value == "x" || e.target.value == "÷"){
-            operator = e.target.value;
-        }
-        if(e.target.value === "C"){
-            displayOpration.textContent = "";
-            displayContent = "";
-        }else if(e.target.value === "=" && (firstOperand.length > 0 && secondOperand.length > 0) && operator != ''){
-            let value = operate(operator,firstOperand,secondOperand);
-            displayContent += e.target.textContent + " " + value;
-            displayOpration.textContent = displayContent;
-            console.log(firstOperand);
-            console.log(secondOperand);
-            console.log(operator);
-            firstOperand.length, secondOperand.length = 0;
-        }
-        else if(operator == ''){
-            firstOperand.push(e.target.value);
-            let first = firstOperand.join('');  
-            displayContent += first + " ";
-            displayOpration.textContent = displayContent;
-        }else{
-            secondOperand.push(e.target.value);
-            let second = secondOperand.join('');
-            displayContent += second + " ";
-            displayOpration.textContent = displayContent;
-        }
-     });
-});
-
- function display(btn){
-    displayOpration.textContent = btn.value;
-} */ 
