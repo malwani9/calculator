@@ -63,12 +63,15 @@ function inputOperand(operand){
 function inputOperator(operatorSign){
   if(operator == ''){
     operator = operatorSign;
-  }else if( operator != ''){
+  }else if(operator != ''){
     let result = operate(operator,firstOperand, secondOperand);
-    displayContentValue = result;
-    updateDisplay();
-    firstOperand = result;
-    secondOperand = null;
+    if(result){
+        displayContentValue = result;
+        updateDisplay();
+        firstOperand = result;
+        secondOperand = null;
+        operator = operatorSign;
+    }
   }
 }
 
