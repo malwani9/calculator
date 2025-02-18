@@ -3,7 +3,7 @@ let operator = '';
 let secondOperand = null;
 
 let buttons = document.querySelectorAll(".calc-button");
-let display = document.getElementById("calculator-display");
+let display = document.getElementById("display-value");
 let displayContentValue = '0'
 
 function clickButton(){
@@ -17,7 +17,7 @@ function clickButton(){
            }
            else if(buttons[i].classList.contains("clear")){
              clear();
-           }else if(buttons[i].classList.contains("equal")){
+           }else if(buttons[i].classList.contains("equal") && (operator != '' && firstOperand != null && secondOperand != null)){
             let result = operate(operator,firstOperand, secondOperand);
             if(result){
                 displayContentValue = result;
