@@ -50,34 +50,30 @@ function inputOperand(operand){
    if(firstOperand === null && operator == ''){
      firstOperand = operand;
      displayContentValue = firstOperand;
-     updateDisplay();
    }else if(firstOperand != null && operator == ''){
     if(displayContentValue.includes('.')){
        firstOperand = displayContentValue + operand;
        displayContentValue = firstOperand;
-       updateDisplay();
+       
     }else{
       firstOperand += operand;
       displayContentValue = firstOperand;
-      updateDisplay();
     }
    }
    else if(firstOperand != null && operator != '' && secondOperand == null){
     secondOperand = operand
     displayContentValue = secondOperand;
-    updateDisplay();
    }
    else if(firstOperand != null && operator != '' && secondOperand != null) {
     if(displayContentValue.includes('.')){
       secondOperand = displayContentValue + operand
       displayContentValue = secondOperand;
-      updateDisplay();
     }else{
       secondOperand += operand
       displayContentValue = secondOperand;
-      updateDisplay();
     }
    }
+   updateDisplay();
 }
 
 function inputOperator(operatorSign){
