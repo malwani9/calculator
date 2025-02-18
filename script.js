@@ -15,6 +15,9 @@ function clickButton(){
            else if(buttons[i].classList.contains("operator")){
              inputOperator(btn.target.value);
            }
+           else if(buttons[i].classList.contains("decimal")){
+               decimal();
+           }
            else if(buttons[i].classList.contains("clear")){
              clear();
            }else if(buttons[i].classList.contains("equal") && (operator != '' && firstOperand != null && secondOperand != null)){
@@ -49,9 +52,15 @@ function inputOperand(operand){
      displayContentValue = firstOperand;
      updateDisplay();
    }else if(firstOperand != null && operator == ''){
-     firstOperand += operand;
-     displayContentValue = firstOperand;
-     updateDisplay();
+    if(displayContentValue.includes('.')){
+       firstOperand = displayContentValue + operand;
+       displayContentValue = firstOperand;
+       updateDisplay();
+    }else{
+      firstOperand += operand;
+      displayContentValue = firstOperand;
+      updateDisplay();
+    }
    }
    else if(firstOperand != null && operator != '' && secondOperand == null){
     secondOperand = operand
@@ -59,9 +68,15 @@ function inputOperand(operand){
     updateDisplay();
    }
    else if(firstOperand != null && operator != '' && secondOperand != null) {
-    secondOperand += operand
-    displayContentValue = secondOperand;
-    updateDisplay();
+    if(displayContentValue.includes('.')){
+      secondOperand = displayContentValue + operand
+      displayContentValue = secondOperand;
+      updateDisplay();
+    }else{
+      secondOperand += operand
+      displayContentValue = secondOperand;
+      updateDisplay();
+    }
    }
 }
 
@@ -85,6 +100,37 @@ function clear(){
   secondOperand = null;
   operator = '';
   displayContentValue = '0';
+  updateDisplay();
+}
+
+function decimal(){
+  if(operator == ''){
+    if(!firstOperand.toString().includes('.')){
+      if(firstOperand === null){
+        firstOperand = 0;
+        displayContentValue = firstOperand + '.';
+      }
+      else if(firstOperand != null){
+        displayContentValue = firstOperand + '.';
+      }
+    }else{
+      return;
+    }
+  }else{
+    if(!secondOperand.toString().includes('.')){
+      if(secondOperand === null){
+        secondOperand = 0;
+        displayContentValue = secondOperand + '.';
+      }
+      else if(secondOperand != null){
+        displayContentValue = secondOperand + '.';
+      }
+    }else{
+       
+      return;
+    } 
+  }
+
   updateDisplay();
 }
 
