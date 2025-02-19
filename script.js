@@ -5,6 +5,29 @@ let secondOperand = null;
 let buttons = document.querySelectorAll(".calc-button");
 let display = document.getElementById("display-value");
 let displayContentValue = '0'
+let numbers = ['1','2','3','4','5','6','7','8','9'];
+let operators = ['+','-','*','/'];
+
+window.addEventListener("keyup",(event) => {
+  if(numbers.includes(event.key)){
+     inputOperand(event.key)
+  }else if(event.key == '*' || event.key == '+' || operators.includes(event.key)){
+    inputOperator(event.key)
+  }
+  else if(event.key === '=' || event.key === 'Enter'){
+    let result = operate(operator,firstOperand, secondOperand);
+            if(result){
+                displayContentValue = result;
+                updateDisplay();
+                firstOperand = result;
+                secondOperand = null;
+                operator = '';
+            }
+  }else if(event.key === 'Backspace'){
+    backspace();
+  }
+  else{return;}
+});
 
 function clickButton(){
     for(let i = 0; i < buttons.length; i++){
@@ -20,7 +43,11 @@ function clickButton(){
            }
            else if(buttons[i].classList.contains("clear")){
              clear();
-           }else if(buttons[i].classList.contains("equal") && (operator != '' && firstOperand != null && secondOperand != null)){
+           }
+           else if(buttons[i].classList.contains("backspace")){
+             backspace();
+           }
+           else if(buttons[i].classList.contains("equal") && (operator != '' && firstOperand != null && secondOperand != null)){
             let result = operate(operator,firstOperand, secondOperand);
             if(result){
                 displayContentValue = result;
@@ -130,6 +157,18 @@ function decimal(){
   updateDisplay();
 }
 
+
+function backspace(){
+   if(operator == ''){
+      displayContentValue = displayContentValue.slice(0,-1);
+      firstOperand = Number(displayContentValue);
+    }else if(operator != '' && secondOperand != 0){
+      displayContentValue = displayContentValue.slice(0,-1);
+      secondOperand = Number(displayContentValue);
+    }
+  updateDisplay();
+}
+
 function operate(operator,a,b){
    if(operator === '+'){
      return add(a,b);
@@ -160,5 +199,7 @@ function multiply(a,b){
 
 function divide(a,b){
     if(b === 0 || b === '0'){return 'ERROR';}
-    return (parseFloat(a) / parseFloat(b)).toFixed(3);
+    else{
+      return (parseFloat(a) / parseFloat(b)).toFixed(3);
+    }
 }
