@@ -4,11 +4,12 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #F1F0E9;
 }
 
 #container{
-    background-color: #676767;
-    height: 350px;
+    background-color: #41644A;
+    height: 450px;
     width: 450px;
     border: 8px solid black;
     display: flex;
@@ -16,11 +17,11 @@ body{
 }
 
 #calculator-display{
-  background-color: #909090;
+  background-color: #41644A;
+  opacity: 0.5;
   width: 450px;
-  height: 80px;
+  height: 100px;
   margin: 0 auto;
-  border: 4px solid #d7d7d7;
   text-align: right;
   display: flex;
   align-items: center;
@@ -39,17 +40,40 @@ body{
 }
 
 #numbers{
+    margin: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-content: flex-start;
     align-items: stretch;
     flex: 1 1 auto;
+    gap: 5px;
 }
 
 .calc-button{
     flex: 1;
-    flex-basis: 80px;
+    flex-basis: 100px;
     height: 60px;
+}
+
+.calc-button:hover{
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.clear, .decimal, .negate, .operator{
+    background-color: #E9762B;
+}
+
+.number{
+    background-color: #91AC8F;
+}
+
+.backspace{
+    background-color: #A31D1D;
+}
+
+.equal{
+    background-color: #0D4715;
 }
